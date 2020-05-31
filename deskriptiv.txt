@@ -1,0 +1,314 @@
+create-dataset barn 
+import BEFOLKNING_FOEDSELS_AAR_MND as fodmnd 
+generate kohort = int( fodmnd / 100 ) 
+drop if kohort > 1980 | kohort < 1972
+import BEFOLKNING_KJOENN as mann 
+destring mann, force 
+replace mann = 0 if mann == 2 
+import NUDB_KOMM_16 as bosted 
+destring bosted, force 
+drop if bosted < 100 | bosted > 2200 
+drop if sysmiss(bosted) 
+import BEFOLKNING_REGSTAT 2002-01-01 as regstat02
+import BEFOLKNING_REGSTAT 2003-01-01 as regstat03
+import BEFOLKNING_REGSTAT 2004-01-01 as regstat04
+import BEFOLKNING_REGSTAT 2005-01-01 as regstat05
+import BEFOLKNING_REGSTAT 2006-01-01 as regstat06
+import BEFOLKNING_REGSTAT 2007-01-01 as regstat07
+import BEFOLKNING_REGSTAT 2008-01-01 as regstat08
+import BEFOLKNING_REGSTAT 2009-01-01 as regstat09
+import BEFOLKNING_REGSTAT 2010-01-01 as regstat10
+import BEFOLKNING_REGSTAT 2011-01-01 as regstat11
+import BEFOLKNING_REGSTAT 2012-01-01 as regstat12
+import BEFOLKNING_REGSTAT 2013-01-01 as regstat13
+import BEFOLKNING_REGSTAT 2014-01-01 as regstat14
+import BEFOLKNING_REGSTAT 2015-01-01 as regstat15
+drop if ((regstat03 != '1') | (regstat04 != '1') | (regstat05 != '1') | (regstat06 != '1') | (regstat07 != '1')) & kohort == 1972 
+drop if ((regstat04 != '1') | (regstat05 != '1') | (regstat06 != '1') | (regstat07 != '1') | (regstat08 != '1')) & kohort == 1973 
+drop if ((regstat05 != '1') | (regstat06 != '1') | (regstat07 != '1') | (regstat08 != '1') | (regstat09 != '1')) & kohort == 1974 
+drop if ((regstat06 != '1') | (regstat07 != '1') | (regstat08 != '1') | (regstat09 != '1') | (regstat10 != '1')) & kohort == 1975 
+drop if ((regstat07 != '1') | (regstat08 != '1') | (regstat09 != '1') | (regstat10 != '1') | (regstat11 != '1')) & kohort == 1976 
+drop if ((regstat08 != '1') | (regstat09 != '1') | (regstat10 != '1') | (regstat11 != '1') | (regstat12 != '1')) & kohort == 1977 
+drop if ((regstat09 != '1') | (regstat10 != '1') | (regstat11 != '1') | (regstat12 != '1') | (regstat13 != '1')) & kohort == 1978 
+drop if ((regstat10 != '1') | (regstat11 != '1') | (regstat12 != '1') | (regstat13 != '1') | (regstat14 != '1')) & kohort == 1979 
+drop if ((regstat11 != '1') | (regstat12 != '1') | (regstat13 != '1') | (regstat14 != '1') | (regstat15 != '1')) & kohort == 1980 
+tabulate kohort 
+import INNTEKT_WSAMINNT_KORRIGERT 2002-01-01 as i02
+replace i02 = 0 if i02 < 0 | sysmiss(i02) 
+generate i02ij = i02*1.2706
+import INNTEKT_WSAMINNT_KORRIGERT 2003-01-01 as i03
+replace i03 = 0 if i03 < 0 | sysmiss(i03) 
+generate i03ij = i03*1.2392
+import INNTEKT_WSAMINNT_KORRIGERT 2004-01-01 as i04
+replace i04 = 0 if i04 < 0 | sysmiss(i04) 
+generate i04ij = i04*1.2346
+import INNTEKT_WSAMINNT_KORRIGERT 2005-01-01 as i05
+replace i05 = 0 if i05 < 0 | sysmiss(i05) 
+generate i05ij = i05*1.2151
+import INNTEKT_WSAMINNT_KORRIGERT 2006-01-01 as i06
+replace i06 = 0 if i06 < 0 | sysmiss(i06) 
+generate i06ij = i06*1.1876
+import INNTEKT_WSAMINNT_KORRIGERT 2007-01-01 as i07
+replace i07 = 0 if i07 < 0 | sysmiss(i07) 
+generate i07ij = i07*1.1792
+import INNTEKT_WSAMINNT_KORRIGERT 2008-01-01 as i08
+replace i08 = 0 if i08 < 0 | sysmiss(i08) 
+generate i08ij = i08*1.1364
+import INNTEKT_WSAMINNT_KORRIGERT 2009-01-01 as i09
+replace i09 = 0 if i09 < 0 | sysmiss(i09) 
+generate i09ij = i09*1.1123
+import INNTEKT_WSAMINNT_KORRIGERT 2010-01-01 as i10
+replace i10 = 0 if i10 < 0 | sysmiss(i10) 
+generate i10ij = i10*1.0858
+import INNTEKT_WSAMINNT_KORRIGERT 2011-01-01 as i11
+replace i11 = 0 if i11 < 0 | sysmiss(i11) 
+generate i11ij = i11*1.0718
+import INNTEKT_WSAMINNT_KORRIGERT 2012-01-01 as i12
+replace i12 = 0 if i12 < 0 | sysmiss(i12) 
+generate i12ij = i12*1.0650
+import INNTEKT_WSAMINNT_KORRIGERT 2013-01-01 as i13
+replace i13 = 0 if i13 < 0 | sysmiss(i13) 
+generate i13ij = i13*1.0428
+import INNTEKT_WSAMINNT_KORRIGERT 2014-01-01 as i14
+replace i14 = 0 if i14 < 0 | sysmiss(i14) 
+generate i14ij = i14*1.0215
+import INNTEKT_WSAMINNT_KORRIGERT 2015-01-01 as i15
+replace i15 = 0 if i15 < 0 | sysmiss(i15) 
+generate i15ij = i15*1.0000
+generate innt31 = 0 
+generate innt32 = 0 
+generate innt33 = 0 
+generate innt34 = 0 
+generate innt35 = 0 
+replace innt31 = i03ij if kohort == 1972
+replace innt32 = i04ij if kohort == 1972
+replace innt33 = i05ij if kohort == 1972
+replace innt34 = i06ij if kohort == 1972
+replace innt35 = i07ij if kohort == 1972
+replace innt31 = i04ij if kohort == 1973
+replace innt32 = i05ij if kohort == 1973
+replace innt33 = i06ij if kohort == 1973
+replace innt34 = i07ij if kohort == 1973
+replace innt35 = i08ij if kohort == 1973
+replace innt31 = i05ij if kohort == 1974
+replace innt32 = i06ij if kohort == 1974
+replace innt33 = i07ij if kohort == 1974
+replace innt34 = i08ij if kohort == 1974
+replace innt35 = i09ij if kohort == 1974
+replace innt31 = i06ij if kohort == 1975
+replace innt32 = i07ij if kohort == 1975
+replace innt33 = i08ij if kohort == 1975
+replace innt34 = i09ij if kohort == 1975
+replace innt35 = i10ij if kohort == 1975
+replace innt31 = i07ij if kohort == 1976
+replace innt32 = i08ij if kohort == 1976
+replace innt33 = i09ij if kohort == 1976
+replace innt34 = i10ij if kohort == 1976
+replace innt35 = i11ij if kohort == 1976
+replace innt31 = i08ij if kohort == 1977
+replace innt32 = i09ij if kohort == 1977
+replace innt33 = i10ij if kohort == 1977
+replace innt34 = i11ij if kohort == 1977
+replace innt35 = i12ij if kohort == 1977
+replace innt31 = i09ij if kohort == 1978
+replace innt32 = i10ij if kohort == 1978
+replace innt33 = i11ij if kohort == 1978
+replace innt34 = i12ij if kohort == 1978
+replace innt35 = i13ij if kohort == 1978
+replace innt31 = i10ij if kohort == 1979
+replace innt32 = i11ij if kohort == 1979
+replace innt33 = i12ij if kohort == 1979
+replace innt34 = i13ij if kohort == 1979
+replace innt35 = i14ij if kohort == 1979
+replace innt31 = i11ij if kohort == 1980
+replace innt32 = i12ij if kohort == 1980
+replace innt33 = i13ij if kohort == 1980
+replace innt34 = i14ij if kohort == 1980
+replace innt35 = i15ij if kohort == 1980
+generate inntekt_barn = (innt31 + innt32 + innt33 + innt34 + innt35) / 5 
+tabulate kohort 
+import BEFOLKNING_FAR_FNR as far_fnr 
+create-dataset far 
+import BEFOLKNING_FOEDSELS_AAR_MND as fodmnd 
+generate kohortf = int( fodmnd / 100 ) 
+drop if kohortf > 1958| kohortf < 1940 
+import BEFOLKNING_KJOENN as mann 
+drop if mann == '2' 
+import BEFOLKNING_REGSTAT 1993-01-01 as regstat93
+import BEFOLKNING_REGSTAT 1994-01-01 as regstat94
+import BEFOLKNING_REGSTAT 1995-01-01 as regstat95
+import BEFOLKNING_REGSTAT 1996-01-01 as regstat96
+import BEFOLKNING_REGSTAT 1997-01-01 as regstat97
+import BEFOLKNING_REGSTAT 1998-01-01 as regstat98
+drop if regstat93 != '1' 
+drop if regstat94 != '1' 
+drop if regstat95 != '1' 
+drop if regstat96 != '1' 
+drop if regstat97 != '1' 
+drop if regstat98 != '1' 
+import INNTEKT_WSAMINNT_KORRIGERT 1993-01-01 as if93
+replace if93 = 0 if (if93 < 0) | sysmiss(if93) 
+generate if93ij = if93*1.5432
+import INNTEKT_WSAMINNT_KORRIGERT 1994-01-01 as if94
+replace if94 = 0 if (if94 < 0) | sysmiss(if94) 
+generate if94ij = if94*1.5221
+import INNTEKT_WSAMINNT_KORRIGERT 1995-01-01 as if95
+replace if95 = 0 if (if95 < 0) | sysmiss(if95) 
+generate if95ij = if95*1.4859
+import INNTEKT_WSAMINNT_KORRIGERT 1996-01-01 as if96
+replace if96 = 0 if (if96 < 0) | sysmiss(if96) 
+generate if96ij = if96*1.4663
+import INNTEKT_WSAMINNT_KORRIGERT 1997-01-01 as if97
+replace if97 = 0 if (if97 < 0) | sysmiss(if97) 
+generate if97ij = if97*1.4306
+import INNTEKT_WSAMINNT_KORRIGERT 1998-01-01 as if98
+replace if98 = 0 if (if98 < 0) | sysmiss(if98) 
+generate if98ij = if98*1.3986
+generate inntekt_far = (if93ij + if94ij + if95ij + if96ij + if97ij + if98ij) / 6 
+generate prosentil_far = quantile(inntekt_far,100) 
+generate kvintil_far = quantile(inntekt_far,5) 
+merge inntekt_far prosentil_far kvintil_far kohortf into barn on far_fnr 
+use barn 
+drop if sysmiss(inntekt_far) | inntekt_far <= 0 
+tabulate kohort 
+generate alder_fodsel = kohort-kohortf 
+summarize alder_fodsel 
+tabulate kohort, summarize(alder_fodsel) 
+generate alder_inntekt = 1993-kohortf 
+tabulate kohort, summarize(alder_inntekt) 
+generate log_inntekt_barn = ln(inntekt_barn) 
+generate log_inntekt_far = ln(inntekt_far) 
+generate prosentil_barn = quantile(inntekt_barn,100) 
+generate kvintil_barn = quantile(inntekt_barn,5) 
+generate topp_kvintil = kvintil_barn==4 
+tabulate kvintil_barn kvintil_far, colpct 
+tabulate prosentil_far, summarize(inntekt_far) 
+tabulate prosentil_far, summarize(inntekt_barn) 
+tabulate prosentil_far, summarize(log_inntekt_far) 
+tabulate prosentil_far, summarize(log_inntekt_barn) 
+tabulate prosentil_far, summarize(prosentil_barn) 
+tabulate prosentil_far if mann == 1, summarize(prosentil_barn)  
+tabulate prosentil_far if mann == 0, summarize(prosentil_barn) 
+regress log_inntekt_barn log_inntekt_far 
+regress log_inntekt_barn log_inntekt_far if mann ==1 
+regress log_inntekt_barn log_inntekt_far if mann == 0  
+regress prosentil_barn prosentil_far  
+regress prosentil_barn prosentil_far if mann == 1 
+regress prosentil_barn prosentil_far if mann == 0 
+regress inntekt_barn inntekt_far if prosentil_far <90 
+regress inntekt_barn inntekt_far if prosentil_far >=90 
+replace bosted = 701 if (bosted == 717 ) | (bosted == 703 ) 
+replace bosted = 704 if (bosted == 721) | (bosted == 705 ) 
+replace bosted = 709 if (bosted == 727) | (bosted == 726 ) | (bosted == 725 ) | (bosted == 708 ) | (bosted == 707)
+replace bosted = 105 if (bosted == 130) | (bosted ==  115) | (bosted == 114) | (bosted == 102) 
+replace bosted = 106 if (bosted == 103) | (bosted ==  113) | (bosted == 131) | (bosted == 133) | (bosted == 134) 
+replace bosted = 403 if (bosted == 414) | (bosted ==  401) 
+replace bosted = 906 if (bosted == 903) | (bosted ==  918) | (bosted == 920) | (bosted == 921) | (bosted == 922) 
+replace bosted = 2004 if (bosted == 2001) | (bosted ==  2016)  
+replace bosted = 716 if (bosted == 718) 
+replace bosted = 1804 if (bosted == 1842) 
+replace bosted = 1576 if (bosted == 1569) | (bosted ==  1572) 
+replace bosted = 1160 if (bosted == 1154) | (bosted ==  1159) 
+replace bosted = 1505 if (bosted == 1503) | (bosted ==  1556) 
+replace bosted = 1756 if (bosted == 1723) | (bosted ==  1729) 
+replace bosted = 1903 if (bosted == 1901) | (bosted ==  1915) 
+replace bosted = 710 if (bosted == 706) | (bosted ==  719) | (bosted ==  720) 
+replace bosted = 1214 if (bosted == 1159) 
+generate pendle = 0 
+replace pendle = 191 if (bosted == 101) | (bosted == 118) 
+replace pendle = 192 if (bosted == 104) | (bosted == 135) | (bosted == 136) | (bosted == 137) 
+replace pendle = 193 if (bosted == 105) | (bosted == 106) | (bosted == 111) | (bosted == 128) 
+replace pendle = 194 if (bosted == 119) | (bosted == 121) | (bosted == 122) | (bosted == 123) | (bosted == 124) | (bosted == 125) | (bosted == 127) | (bosted == 138) 
+replace pendle = 291 if (bosted == 211) | (bosted == 213) | (bosted == 214) | (bosted == 215) | (bosted == 216) | (bosted == 217) 
+replace pendle = 292 if (bosted == 219) | (bosted == 220) 
+replace pendle = 293 if (bosted == 221) | (bosted == 226) | (bosted == 227) | (bosted == 228) | (bosted == 229) | (bosted == 230) | (bosted == 231) | (bosted == 233) | (bosted == 234) | (bosted == 236) 
+replace pendle = 294 if (bosted == 235) | (bosted == 237) | (bosted == 238) | (bosted == 239) 
+replace pendle = 391 if (bosted == 301) 
+replace pendle = 491 if (bosted == 402) | (bosted == 418) | (bosted == 419) | (bosted == 420) | (bosted == 423) | (bosted == 425) 
+replace pendle = 492 if (bosted == 403) | (bosted == 412) | (bosted == 415) | (bosted == 417) 
+replace pendle = 493 if (bosted == 426) | (bosted == 427) | (bosted == 428) | (bosted == 429) | (bosted == 430) | (bosted == 434) 
+replace pendle = 494 if (bosted == 432) | (bosted == 436) | (bosted == 437) | (bosted == 438) | (bosted == 439) | (bosted == 441) 
+replace pendle = 591 if (bosted == 501) | (bosted == 521) | (bosted == 522) 
+replace pendle = 592 if (bosted == 502) | (bosted == 528) | (bosted == 529) | (bosted == 536) | (bosted == 538) 
+replace pendle = 593 if (bosted == 516) | (bosted == 519) | (bosted == 520) 
+replace pendle = 594 if (bosted == 511) | (bosted == 512) | (bosted == 513) | (bosted == 514) | (bosted == 515) | (bosted == 517) 
+replace pendle = 595 if (bosted == 532) | (bosted == 533) | (bosted == 534) 
+replace pendle = 596 if (bosted == 540) | (bosted == 541) | (bosted == 542) | (bosted == 543) | (bosted == 544) | (bosted == 545) 
+replace pendle = 691 if (bosted == 602) | (bosted == 621) | (bosted == 623) | (bosted == 624) | (bosted == 625) | (bosted == 626) | (bosted == 627) | (bosted == 628) 
+replace pendle = 692 if (bosted == 604) | (bosted == 631) | (bosted == 632) | (bosted == 633) 
+replace pendle = 693 if (bosted == 605) | (bosted == 612) | (bosted == 622) 
+replace pendle = 694 if (bosted == 615) | (bosted == 616) | (bosted == 617) | (bosted == 618) | (bosted == 619) | (bosted == 620) 
+replace pendle = 791 if (bosted == 701) | (bosted == 704) | (bosted == 716) | (bosted == 722) | (bosted == 723) 
+replace pendle = 792 if (bosted == 702) | (bosted == 714) 
+replace pendle = 793 if (bosted == 709) | (bosted == 710) | (bosted == 728) 
+replace pendle = 794 if (bosted == 711) | (bosted == 713) 
+replace pendle = 891 if (bosted == 805) | (bosted == 806) | (bosted == 811) | (bosted == 814) | (bosted == 819) 
+replace pendle = 892 if (bosted == 807) | (bosted == 821) | (bosted == 822) | (bosted == 827) 
+replace pendle = 893 if (bosted == 815) | (bosted == 817) 
+replace pendle = 894 if (bosted == 826) 
+replace pendle = 895 if (bosted == 828) | (bosted == 829) | (bosted == 830) | (bosted == 831) | (bosted == 833) | (bosted == 834) 
+replace pendle = 991 if (bosted == 901) | (bosted == 911) 
+replace pendle = 992 if (bosted == 904) | (bosted == 906) | (bosted == 912) | (bosted == 914) | (bosted == 919) | (bosted == 929) 
+replace pendle = 993 if (bosted == 926) | (bosted == 928) 
+replace pendle = 994 if (bosted == 935) | (bosted == 937) | (bosted == 938) | (bosted == 940) | (bosted == 941) 
+replace pendle = 1091 if (bosted == 1001) | (bosted == 1014) | (bosted == 1017) | (bosted == 1018) 
+replace pendle = 1092 if (bosted == 1002) | (bosted == 1021) | (bosted == 1026) | (bosted == 1027) | (bosted == 1029) 
+replace pendle = 1093 if (bosted == 1003) | (bosted == 1032) | (bosted == 1034) 
+replace pendle = 1094 if (bosted == 1004) | (bosted == 1037) | (bosted == 1046) 
+replace pendle = 1191 if (bosted == 1101) | (bosted == 1111) | (bosted == 1112) | (bosted == 1114) 
+replace pendle = 1192 if (bosted == 1102) | (bosted == 1103) | (bosted == 1122) | (bosted == 1124) | (bosted == 1127) | (bosted == 1129) | (bosted == 1130) | (bosted == 1133) | (bosted == 1141) | (bosted == 1142) | (bosted == 1144) 
+replace pendle = 1193 if (bosted == 1106) | (bosted == 1134) | (bosted == 1135) | (bosted == 1145) | (bosted == 1146) | (bosted == 1149) | (bosted == 1151) | (bosted == 1160) 
+replace pendle = 1194 if (bosted == 1119) | (bosted == 1120) | (bosted == 1121) 
+replace pendle = 1291 if (bosted == 1201) | (bosted == 1238) | (bosted == 1241) | (bosted == 1242) | (bosted == 1243) | (bosted == 1244) | (bosted == 1245) | (bosted == 1246) | (bosted == 1247) | (bosted == 1251) | (bosted == 1252) | (bosted == 1253) | (bosted == 1256) | (bosted == 1259) | (bosted == 1260) | (bosted == 1263) | (bosted == 1264) | (bosted == 1265) | (bosted == 1266) 
+replace pendle = 1294 if (bosted == 1227) | (bosted == 1228) | (bosted == 1231) | (bosted == 1232) 
+replace pendle = 1295 if (bosted == 1233) | (bosted == 1234) | (bosted == 1235) 
+replace pendle = 1296 if (bosted == 1211) | (bosted == 1216) | (bosted == 1219) | (bosted == 1221) | (bosted == 1222) | (bosted == 1223) | (bosted == 1224) 
+replace pendle = 1491 if (bosted == 1401) | (bosted == 1438) 
+replace pendle = 1492 if (bosted == 1411) | (bosted == 1412) | (bosted == 1416) | (bosted == 1418) 
+replace pendle = 1493 if (bosted == 1417) | (bosted == 1419) | (bosted == 1420) | (bosted == 1421) | (bosted == 1422) | (bosted == 1424) | (bosted == 1426) 
+replace pendle = 1494 if (bosted == 1413) | (bosted == 1428) | (bosted == 1429) | (bosted == 1430) | (bosted == 1431) | (bosted == 1432) | (bosted == 1433) 
+replace pendle = 1495 if (bosted == 1439) | (bosted == 1441) | (bosted == 1443) | (bosted == 1444) | (bosted == 1445) | (bosted == 1449) 
+replace pendle = 1591 if (bosted == 1502) | (bosted == 1535) | (bosted == 1539) | (bosted == 1543) | (bosted == 1545) | (bosted == 1547) | (bosted == 1548) | (bosted == 1551) | (bosted == 1557) 
+replace pendle = 1592 if (bosted == 1505) | (bosted == 1554) | (bosted == 1573) | (bosted == 1576) 
+replace pendle = 1593 if (bosted == 1504) | (bosted == 1523) | (bosted == 1524) | (bosted == 1525) | (bosted == 1526) | (bosted == 1528) | (bosted == 1529) | (bosted == 1531) | (bosted == 1532) | (bosted == 1534) | (bosted == 1546) 
+replace pendle = 1594 if (bosted == 1511) | (bosted == 1514) | (bosted == 1515) | (bosted == 1516) | (bosted == 1517) 
+replace pendle = 1595 if (bosted == 1519) | (bosted == 1520) 
+replace pendle = 1596 if (bosted == 1560) | (bosted == 1563) 
+replace pendle = 1597 if (bosted == 1566) | (bosted == 1567) | (bosted == 1571) 
+replace pendle = 1691 if (bosted == 1601) | (bosted == 1624) | (bosted == 1648) | (bosted == 1653) | (bosted == 1657) | (bosted == 1662) | (bosted == 1663) | (bosted == 1664) | (bosted == 1665) 
+replace pendle = 1692 if (bosted == 1617) | (bosted == 1620) 
+replace pendle = 1693 if (bosted == 1621) | (bosted == 1627) | (bosted == 1630) | (bosted == 1632) | (bosted == 1633) 
+replace pendle = 1694 if (bosted == 1634) | (bosted == 1635) 
+replace pendle = 1695 if (bosted == 1612) | (bosted == 1613) | (bosted == 1622) | (bosted == 1636) | (bosted == 1638) 
+replace pendle = 1696 if (bosted == 1640) | (bosted == 1644) 
+replace pendle = 1791 if (bosted == 1702) | (bosted == 1718) | (bosted == 1724) | (bosted == 1725) | (bosted == 1736) | (bosted == 1756) 
+replace pendle = 1792 if (bosted == 1703) | (bosted == 1743) | (bosted == 1744) | (bosted == 1748) | (bosted == 1749) 
+replace pendle = 1793 if (bosted == 1711) | (bosted == 1714) 
+replace pendle = 1794 if (bosted == 1717) | (bosted == 1719) | (bosted == 1721) 
+replace pendle = 1795 if (bosted == 1738) | (bosted == 1739) | (bosted == 1740) | (bosted == 1742) 
+replace pendle = 1796 if (bosted == 1750) | (bosted == 1751) | (bosted == 1755) 
+replace pendle = 1891 if (bosted == 1804) | (bosted == 1836) | (bosted == 1837) | (bosted == 1838) | (bosted == 1839) | (bosted == 1840) | (bosted == 1841) | (bosted == 1845) | (bosted == 1848) | (bosted == 1849) 
+replace pendle = 1892 if (bosted == 1805) | (bosted == 1850) | (bosted == 1851) | (bosted == 1852) | (bosted == 1853) | (bosted == 1854) 
+replace pendle = 1893 if (bosted == 1811) | (bosted == 1812) | (bosted == 1813) | (bosted == 1815) | (bosted == 1816) 
+replace pendle = 1894 if (bosted == 1818) | (bosted == 1820) | (bosted == 1822) | (bosted == 1827) | (bosted == 1834) | (bosted == 1835) 
+replace pendle = 1895 if (bosted == 1824) | (bosted == 1825) | (bosted == 1826) 
+replace pendle = 1896 if (bosted == 1828) | (bosted == 1832) | (bosted == 1833) 
+replace pendle = 1897 if (bosted == 1856) | (bosted == 1857) | (bosted == 1859) | (bosted == 1860) | (bosted == 1865) | (bosted == 1874) 
+replace pendle = 1898 if (bosted == 1866) | (bosted == 1867) | (bosted == 1868) | (bosted == 1870) | (bosted == 1871) 
+replace pendle = 1991 if (bosted == 1903) | (bosted == 1911) | (bosted == 1913) | (bosted == 1917) 
+replace pendle = 1992 if (bosted == 1902) | (bosted == 1933) | (bosted == 1936) | (bosted == 1938) | (bosted == 1939) 
+replace pendle = 1993 if (bosted == 1919) | (bosted == 1920) | (bosted == 1922) | (bosted == 1923) | (bosted == 1924) 
+replace pendle = 1994 if (bosted == 1925) | (bosted == 1926) | (bosted == 1927) | (bosted == 1928) | (bosted == 1929) | (bosted == 1931) 
+replace pendle = 1995 if (bosted == 1940) | (bosted == 1941) | (bosted == 1942) | (bosted == 1943) 
+replace pendle = 2091 if (bosted == 2002) | (bosted == 2003) | (bosted == 2024) | (bosted == 2025) | (bosted == 2027) | (bosted == 2028) 
+replace pendle = 2092 if (bosted == 2004) | (bosted == 2017) | (bosted == 2018) | (bosted == 2019) | (bosted == 2020) | (bosted == 2021) | (bosted == 2022) | (bosted == 2023) 
+replace pendle = 2093 if (bosted == 2011) | (bosted == 2012) | (bosted == 2014) | (bosted == 2015) 
+replace pendle = 2094 if (bosted == 2030) 
+tabulate pendle 
+regress prosentil_barn c.prosentil_far##i.pendle, noconstant 
+regress prosentil_barn c.prosentil_far##i.pendle if mann == 1, noconstant 
+regress prosentil_barn c.prosentil_far##i.pendle if mann == 0, noconstant 
+drop if (bosted == 118 ) | (bosted == 121 ) | (bosted == 432 ) | (bosted == 434 ) | (bosted == 436 ) | (bosted == 438 ) | (bosted == 439 ) | (bosted == 441 ) | (bosted == 512 ) | (bosted == 513 ) | (bosted == 514 ) | (bosted == 541 ) | (bosted == 543 ) | (bosted == 545 ) | (bosted == 615 ) | (bosted == 618 ) | (bosted == 622 ) | (bosted == 631 ) | (bosted == 632 ) | (bosted == 827 ) | (bosted == 830 ) | (bosted == 831 ) | (bosted == 833 ) | (bosted == 912 ) | (bosted == 929 ) | (bosted == 935 ) | (bosted == 938 ) | (bosted == 940 ) | (bosted == 941 ) | (bosted == 1021 ) | (bosted == 1026 ) | (bosted == 1027 ) | (bosted == 1034 ) | (bosted == 1046 ) | (bosted == 1129 ) | (bosted == 1144 ) | (bosted == 1145 ) | (bosted == 1151 ) | (bosted == 1227 ) | (bosted == 1232 ) | (bosted == 1233 ) | (bosted == 1234 ) | (bosted == 1252 ) | (bosted == 1265 ) | (bosted == 1266 ) | (bosted == 1411 ) | (bosted == 1412 ) | (bosted == 1413 ) | (bosted == 1418 ) | (bosted == 1421 ) | (bosted == 1422 ) | (bosted == 1444 ) | (bosted == 1523 ) | (bosted == 1524 ) | (bosted == 1526 ) | (bosted == 1545 ) | (bosted == 1546 ) | (bosted == 1567 ) | (bosted == 1571 ) | (bosted == 1613 ) | (bosted == 1622 ) | (bosted == 1632 ) | (bosted == 1633 ) | (bosted == 1644 ) | (bosted == 1665 ) | (bosted == 1717 ) | (bosted == 1725 ) | (bosted == 1736 ) | (bosted == 1738 ) | (bosted == 1739 ) | (bosted == 1740 ) | (bosted == 1742 ) | (bosted == 1743 ) | (bosted == 1748 ) | (bosted == 1749 ) | (bosted == 1755 ) | (bosted == 1811 ) | (bosted == 1812 ) | (bosted == 1815 ) | (bosted == 1816 ) | (bosted == 1818 ) | (bosted == 1822 ) | (bosted == 1825 ) | (bosted == 1826 ) | (bosted == 1827 ) | (bosted == 1828 ) | (bosted == 1834 ) | (bosted == 1835 ) | (bosted == 1836 ) | (bosted == 1838 ) | (bosted == 1839 ) | (bosted == 1849 ) | (bosted == 1850 ) | (bosted == 1852 ) | (bosted == 1853 ) | (bosted == 1856 ) | (bosted == 1857 ) | (bosted == 1859 ) | (bosted == 1874 ) | (bosted == 1917 ) | (bosted == 1919 ) | (bosted == 1920 ) | (bosted == 1926 ) | (bosted == 1927 ) | (bosted == 1928 ) | (bosted == 1929 ) | (bosted == 1939 ) | (bosted == 1940 ) | (bosted == 1943 ) | (bosted == 2002 ) | (bosted == 2014 ) | (bosted == 2015 ) | (bosted == 2017 ) | (bosted == 2018 ) | (bosted == 2021 ) | (bosted == 2022 ) | (bosted == 2023 ) | (bosted == 2024 ) | (bosted == 2027 ) | (bosted == 2028 ) 
+tabulate bosted 
+regress prosentil_barn c.prosentil_far##i.bosted, noconstant 
+regress topp_kvintil i.bosted if kvintil_far == 0, noconstant 
