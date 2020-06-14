@@ -1,0 +1,580 @@
+create-dataset flytting 
+import BEFOLKNING_FOEDSELS_AAR_MND as fodmnd 
+generate kohort = int( fodmnd / 100 ) 
+drop if (kohort > 1988) | (kohort < 1977) 
+import BEFOLKNING_INNALDER as innalder 
+keep if innalder == 0 
+generate flyttetidspunkt = 0 
+generate flytter  = 0 
+import BOSATTEFDT_BOSTED 1992-01-01 as kommune92 
+drop if sysmiss(kommune92) 
+destring kommune92, force 
+import BOSATTEFDT_BOSTED 1993-01-01 as kommune93 
+drop if sysmiss(kommune93) 
+destring kommune93, force 
+import BOSATTEFDT_BOSTED 1994-01-01 as kommune94 
+drop if sysmiss(kommune94) 
+destring kommune94, force 
+import BOSATTEFDT_BOSTED 1995-01-01 as kommune95 
+drop if sysmiss(kommune95) 
+destring kommune95, force 
+import BOSATTEFDT_BOSTED 1996-01-01 as kommune96 
+drop if sysmiss(kommune96) 
+destring kommune96, force 
+import BOSATTEFDT_BOSTED 1997-01-01 as kommune97 
+drop if sysmiss(kommune97) 
+destring kommune97, force 
+import BOSATTEFDT_BOSTED 1998-01-01 as kommune98 
+drop if sysmiss(kommune98) 
+destring kommune98, force 
+import BOSATTEFDT_BOSTED 1999-01-01 as kommune99 
+drop if sysmiss(kommune99) 
+destring kommune99, force 
+import BOSATTEFDT_BOSTED 2000-01-01 as kommune00 
+drop if sysmiss(kommune00) 
+destring kommune00, force 
+import BOSATTEFDT_BOSTED 2001-01-01 as kommune01 
+drop if sysmiss(kommune01) 
+destring kommune01, force 
+import BOSATTEFDT_BOSTED 2002-01-01 as kommune02 
+drop if sysmiss(kommune02) 
+destring kommune02, force 
+import BOSATTEFDT_BOSTED 2003-01-01 as kommune03 
+drop if sysmiss(kommune03) 
+destring kommune03, force 
+import BOSATTEFDT_BOSTED 2004-01-01 as kommune04 
+drop if sysmiss(kommune04) 
+destring kommune04, force 
+import BOSATTEFDT_BOSTED 2005-01-01 as kommune05 
+drop if sysmiss(kommune05) 
+destring kommune05, force 
+import BOSATTEFDT_BOSTED 2006-01-01 as kommune06 
+drop if sysmiss(kommune06) 
+destring kommune06, force 
+replace kommune92 = 106 if (kommune92 == 103) | (kommune92 == 113) | (kommune92 == 131) | (kommune92 ==  133) | (kommune92 == 134) 
+replace kommune93 = 106 if (kommune93 == 103) | (kommune93 == 113) | (kommune93 == 131) | (kommune93 ==  133) | (kommune93 == 134) 
+replace kommune94 = 106 if (kommune94 == 103) | (kommune94 == 113) | (kommune94 == 131) | (kommune94 ==  133) | (kommune94 == 134) 
+replace kommune95 = 106 if (kommune95 == 103) | (kommune95 == 113) | (kommune95 == 131) | (kommune95 ==  133) | (kommune95 == 134) 
+replace kommune92 = 1804 if (kommune92 == 1842) 
+replace kommune93 = 1804 if (kommune93 == 1842) 
+replace kommune94 = 1804 if (kommune94 == 1842) 
+replace kommune95 = 1804 if (kommune95 == 1842) 
+replace kommune96 = 1804 if (kommune96 == 1842) 
+replace kommune97 = 1804 if (kommune97 == 1842) 
+replace kommune98 = 1804 if (kommune98 == 1842) 
+replace kommune00 = 1804 if (kommune00 == 1842) 
+replace kommune01 = 1804 if (kommune01 == 1842) 
+replace kommune02 = 1804 if (kommune02 == 1842) 
+replace kommune03 = 1804 if (kommune03 == 1842) 
+replace kommune04 = 1804 if (kommune04 == 1842) 
+replace kommune05 = 1804 if (kommune05 == 1842) 
+replace kommune06 = 1804 if (kommune06 == 1842) 
+import BEFOLKNING_REGSTAT 2003-01-01 as regstat03
+import BEFOLKNING_REGSTAT 2004-01-01 as regstat04
+import BEFOLKNING_REGSTAT 2005-01-01 as regstat05
+import BEFOLKNING_REGSTAT 2006-01-01 as regstat06
+import BEFOLKNING_REGSTAT 2007-01-01 as regstat07
+import BEFOLKNING_REGSTAT 2008-01-01 as regstat08
+import BEFOLKNING_REGSTAT 2009-01-01 as regstat09
+import BEFOLKNING_REGSTAT 2010-01-01 as regstat10
+import BEFOLKNING_REGSTAT 2011-01-01 as regstat11
+import BEFOLKNING_REGSTAT 2012-01-01 as regstat12
+import BEFOLKNING_REGSTAT 2013-01-01 as regstat13
+import BEFOLKNING_REGSTAT 2014-01-01 as regstat14
+import BEFOLKNING_REGSTAT 2015-01-01 as regstat15
+import INNTEKT_WSAMINNT_KORRIGERT 2003-01-01 as i03
+replace i03 = 0 if sysmiss(i03) 
+generate i03ij = i03*1.2392
+import INNTEKT_WSAMINNT_KORRIGERT 2004-01-01 as i04
+replace i04 = 0 if sysmiss(i04) 
+generate i04ij = i04*1.2346
+import INNTEKT_WSAMINNT_KORRIGERT 2005-01-01 as i05
+replace i05 = 0 if sysmiss(i05) 
+generate i05ij = i05*1.2151
+import INNTEKT_WSAMINNT_KORRIGERT 2006-01-01 as i06
+replace i06 = 0 if sysmiss(i06) 
+generate i06ij = i06*1.1876
+import INNTEKT_WSAMINNT_KORRIGERT 2007-01-01 as i07
+replace i07 = 0 if sysmiss(i07) 
+generate i07ij = i07*1.1792
+import INNTEKT_WSAMINNT_KORRIGERT 2008-01-01 as i08
+replace i08 = 0 if sysmiss(i08) 
+generate i08ij = i08*1.1364
+import INNTEKT_WSAMINNT_KORRIGERT 2009-01-01 as i09
+replace i09 = 0 if sysmiss(i09) 
+generate i09ij = i09*1.1123
+import INNTEKT_WSAMINNT_KORRIGERT 2010-01-01 as i10
+replace i10 = 0 if sysmiss(i10) 
+generate i10ij = i10*1.0858
+import INNTEKT_WSAMINNT_KORRIGERT 2011-01-01 as i11
+replace i11 = 0 if sysmiss(i11) 
+generate i11ij = i11*1.0718
+import INNTEKT_WSAMINNT_KORRIGERT 2012-01-01 as i12
+replace i12 = 0 if sysmiss(i12) 
+generate i12ij = i12*1.0650
+import INNTEKT_WSAMINNT_KORRIGERT 2013-01-01 as i13
+replace i13 = 0 if sysmiss(i13) 
+generate i13ij = i13*1.0428
+import INNTEKT_WSAMINNT_KORRIGERT 2014-01-01 as i14
+replace i14 = 0 if sysmiss(i14) 
+generate i14ij = i14*1.0215
+import INNTEKT_WSAMINNT_KORRIGERT 2015-01-01 as i15
+replace i15 = 0 if sysmiss(i15) 
+generate i15ij = i15*1.0000
+drop if (regstat04 != '1') & kohort == 77 
+drop if (regstat05 != '1') & kohort == 78 
+drop if (regstat06 != '1') & kohort == 79 
+drop if (regstat07 != '1') & kohort == 80 
+drop if (regstat08 != '1') & kohort == 81 
+drop if (regstat09 != '1') & kohort == 82 
+drop if (regstat10 != '1') & kohort == 83 
+drop if (regstat11 != '1') & kohort == 84 
+drop if (regstat12 != '1') & kohort == 85 
+drop if (regstat13 != '1') & kohort == 86 
+drop if (regstat14 != '1') & kohort == 87 
+drop if (regstat15 != '1') & kohort == 88 
+generate innt27 = 0 
+replace innt27 = i04ij if kohort == 1977
+replace innt27 = i05ij if kohort == 1978
+replace innt27 = i06ij if kohort == 1979
+replace innt27 = i07ij if kohort == 1980
+replace innt27 = i08ij if kohort == 1981
+replace innt27 = i09ij if kohort == 1982
+replace innt27 = i10ij if kohort == 1983
+replace innt27 = i11ij if kohort == 1984
+replace innt27 = i12ij if kohort == 1985
+replace innt27 = i13ij if kohort == 1986
+replace innt27 = i14ij if kohort == 1987
+replace innt27 = i15ij if kohort == 1988
+generate inntekt_barn = innt27 
+import BEFOLKNING_FAR_FNR as far_fnr 
+create-dataset far 
+import BEFOLKNING_FOEDSELS_AAR_MND as fodmnd 
+generate kohortf = int( fodmnd / 100 ) 
+drop if kohortf > 1963 | kohortf < 1940 
+import BEFOLKNING_KJOENN as mann 
+drop if mann == '2' 
+import BEFOLKNING_REGSTAT 1993-01-01 as regstat93
+import BEFOLKNING_REGSTAT 1994-01-01 as regstat94
+import BEFOLKNING_REGSTAT 1995-01-01 as regstat95
+import BEFOLKNING_REGSTAT 1996-01-01 as regstat96
+import BEFOLKNING_REGSTAT 1997-01-01 as regstat97
+import BEFOLKNING_REGSTAT 1998-01-01 as regstat98
+drop if (regstat93!= '1') | (regstat94!= '1') | (regstat95!= '1') | (regstat96!= '1') | (regstat97!= '1') | (regstat98 != '1') 
+import INNTEKT_WSAMINNT_KORRIGERT 1993-01-01 as if93
+replace if93 = 0 if sysmiss(if93) 
+generate if93ij = if93*1.5432
+import INNTEKT_WSAMINNT_KORRIGERT 1994-01-01 as if94
+replace if94 = 0 if sysmiss(if94) 
+generate if94ij = if94*1.5221
+import INNTEKT_WSAMINNT_KORRIGERT 1995-01-01 as if95
+replace if95 = 0 if sysmiss(if95) 
+generate if95ij = if95*1.4859
+import INNTEKT_WSAMINNT_KORRIGERT 1996-01-01 as if96
+replace if96 = 0 if sysmiss(if96) 
+generate if96ij = if96*1.4663
+import INNTEKT_WSAMINNT_KORRIGERT 1997-01-01 as if97
+replace if97 = 0 if sysmiss(if97) 
+generate if97ij = if97*1.4306
+import INNTEKT_WSAMINNT_KORRIGERT 1998-01-01 as if98
+replace if98 = 0 if sysmiss(if98) 
+generate if98ij = if98*1.3986
+generate inntekt_far = (if93ij + if94ij + if95ij + if96ij + if97ij + if98ij) / 6 
+replace inntekt_far = 0 if sysmiss(inntekt_far) 
+drop if sysmiss(inntekt_far) | inntekt_far <= 0 
+generate prosentil_far = quantile(inntekt_far, 100) 
+merge prosentil_far into flytting on far_fnr 
+use flytting 
+drop if sysmiss(prosentil_far) 
+generate prosentil_barn = quantile(inntekt_barn, 100) 
+keep if (kommune92 == 301) | (kommune92 == 1201) | (kommune92 == 1601) | (kommune92 == 1103) | (kommune92 == 219) | (kommune92 == 1001) | (kommune92 == 106) | (kommune92 == 1102) | (kommune92 == 1902) | (kommune92 == 602) | (kommune92 == 806) | (kommune92 == 105) | (kommune92 == 1804) | (kommune92 == 220) | (kommune92 == 1504) | (kommune92 == 906) | (kommune92 == 1149) | (kommune92 == 709) | (kommune92 == 706) | (kommune92 == 704) | (kommune92 == 231) | (kommune92 == 1106) | (kommune92 == 805) | (kommune92 == 412) | (kommune92 == 230) | (kommune92 == 1502) | (kommune92 == 403) | (kommune92 == 605) | (kommune92 == 502) | (kommune92 == 101) | (kommune92 == 1833) | (kommune92 == 1901) | (kommune92 == 104) | (kommune92 == 501) | (kommune92 == 701) | (kommune92 == 213) | (kommune92 == 1247) | (kommune92 == 604) | (kommune92 == 1246) | (kommune92 == 235) | (kommune92 == 1124) | (kommune92 == 217) | (kommune92 == 904) | (kommune92 == 1702) | (kommune92 == 625) | (kommune92 == 1714) | (kommune92 == 626) | (kommune92 == 1221) | (kommune92 == 1719) | (kommune92 == 722) | (kommune92 == 2012) | (kommune92 == 1805) | (kommune92 == 1119) | (kommune92 == 427) | (kommune92 == 1503) | (kommune92 == 237) | (kommune92 == 417) | (kommune92 == 1121) | (kommune92 == 1243) | (kommune92 == 236) | (kommune92 == 233) | (kommune92 == 402) | (kommune92 == 1101) | (kommune92 == 814) | (kommune92 == 627) | (kommune92 == 1263) | (kommune92 == 1120) | (kommune92 == 1224) | (kommune92 == 1002) | (kommune92 == 624) | (kommune92 == 1721) | (kommune92 == 1235) | (kommune92 == 216) | (kommune92 == 228) | (kommune92 == 1653) | (kommune92 == 1824) | (kommune92 == 1014) | (kommune92 == 124) | (kommune92 == 528) | (kommune92 == 1219) | (kommune92 == 623) | (kommune92 == 1432) | (kommune92 == 211) | (kommune92 == 1130) | (kommune92 == 1703) | (kommune92 == 214) | (kommune92 == 136) | (kommune92 == 807) | (kommune92 == 534) | (kommune92 == 221) | (kommune92 == 1520) | (kommune92 == 226) | (kommune92 == 1401) | (kommune92 == 529) | (kommune92 == 1931) | (kommune92 == 1638) | (kommune92 == 1860) | (kommune92 == 1663) | (kommune92 == 1122) | (kommune92 == 815) | (kommune92 == 720) | (kommune92 == 215) | (kommune92 == 1146) | (kommune92 == 926) | (kommune92 == 1018) | (kommune92 == 1003) | (kommune92 == 1548) | (kommune92 == 125) | (kommune92 == 1841) | (kommune92 == 1870) | (kommune92 == 1534) | (kommune92 == 1865) | (kommune92 == 1519) | (kommune92 == 1127) | (kommune92 == 1238) | (kommune92 == 1515) | (kommune92 == 1004) | (kommune92 == 702) | (kommune92 == 238) | (kommune92 == 533) | (kommune92 == 716) | (kommune92 == 229) | (kommune92 == 2004) | (kommune92 == 1032) | (kommune92 == 227) | (kommune92 == 2030) | (kommune92 == 1528) | (kommune92 == 1866) | (kommune92 == 1531) | (kommune92 == 1924) | (kommune92 == 1253) | (kommune92 == 128) | (kommune92 == 1532) | (kommune92 == 1813) | (kommune92 == 1420) | (kommune92 == 1449) | (kommune92 == 628) | (kommune92 == 713) | (kommune92 == 1820) | (kommune92 == 415) | (kommune92 == 1837) | (kommune92 == 1539) | (kommune92 == 1563) | (kommune92 == 901) | (kommune92 == 1516) | (kommune92 == 1228) | (kommune92 == 1443) | (kommune92 == 1439) | (kommune92 == 428) | (kommune92 == 419) 
+generate destinasjon = 0 
+replace flytter = flytter + 1 if (kommune93 != kommune92) & (1993 - kohort <= 18) 
+replace destinasjon = kommune93 if (flytter == 1)  & (1993 - kohort == 18) 
+replace flyttetidspunkt = 1992 if (kommune93 != kommune92)  & (flytter == 1) & (1993 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune94 != kommune93) & (1994 - kohort <= 18) 
+replace destinasjon = kommune94 if (flytter == 1)  & (1994 - kohort == 18) 
+replace flyttetidspunkt = 1993 if (kommune94 != kommune93)  & (flytter == 1) & (1994 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune95 != kommune94) & (1995 - kohort <= 18) 
+replace destinasjon = kommune95 if (flytter == 1)  & (1995 - kohort == 18) 
+replace flyttetidspunkt = 1994 if (kommune95 != kommune94)  & (flytter == 1) & (1995 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune96 != kommune95) & (1996 - kohort <= 18) 
+replace destinasjon = kommune96 if (flytter == 1)  & (1996 - kohort == 18) 
+replace flyttetidspunkt = 1995 if (kommune96 != kommune95)  & (flytter == 1) & (1996 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune97 != kommune96) & (1997 - kohort <= 18) 
+replace destinasjon = kommune97 if (flytter == 1)  & (1997 - kohort == 18) 
+replace flyttetidspunkt = 1996 if (kommune97 != kommune96)  & (flytter == 1) & (1997 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune98 != kommune97) & (1998 - kohort <= 18) 
+replace destinasjon = kommune98 if (flytter == 1)  & (1998 - kohort == 18) 
+replace flyttetidspunkt = 1997 if (kommune98 != kommune97)  & (flytter == 1) & (1998 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune99 != kommune98) & (1999 - kohort <= 18) 
+replace destinasjon = kommune99 if (flytter == 1)  & (1999 - kohort == 18) 
+replace flyttetidspunkt = 1998 if (kommune99 != kommune98)  & (flytter == 1) & (1999 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune00 != kommune99) & (2000 - kohort <= 18) 
+replace destinasjon = kommune00 if (flytter == 1) & (2000 - kohort == 18) 
+replace flyttetidspunkt = 1999 if (kommune00 != kommune99) & (flytter == 1) & (2000 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune01 != kommune00) & (2001 - kohort <= 18) 
+replace destinasjon = kommune01 if (flytter == 1) & (2001 - kohort == 18)
+replace flyttetidspunkt = 2000 if (kommune01 != kommune00) & (flytter == 1) & (2001 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune02 != kommune01) & (2002 - kohort <= 18) 
+replace destinasjon = kommune02 if (flytter == 1) & (2002 - kohort == 18)
+replace flyttetidspunkt = 2001 if (kommune02 != kommune01) & (flytter == 1) & (2002 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune03 != kommune02) & (2003 - kohort <= 18) 
+replace destinasjon = kommune03 if (flytter == 1) & (2003 - kohort == 18)
+replace flyttetidspunkt = 2002 if (kommune03 != kommune02) & (flytter == 1) & (2003 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune04 != kommune03) & (2004 - kohort <= 18) 
+replace destinasjon = kommune04 if (flytter == 1) & (2004 - kohort == 18)
+replace flyttetidspunkt = 2003 if (kommune04 != kommune03) & (flytter == 1) & (2004 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune05 != kommune04) & (2005 - kohort <= 18) 
+replace destinasjon = kommune05 if (flytter == 1) & (2005 - kohort == 18)
+replace flyttetidspunkt = 2004 if (kommune05 != kommune04) & (flytter == 1) & (2005 - kohort <= 18) 
+replace flytter = flytter + 1 if (kommune06 != kommune05) & (2006 - kohort <= 18) 
+replace destinasjon = kommune06 if (flytter == 1) & (2006 - kohort == 18)
+replace flyttetidspunkt = 2005 if (kommune06 != kommune05) & (flytter == 1) & (2006 - kohort <= 18) 
+keep if (destinasjon == 301) | (destinasjon == 1201) | (destinasjon == 1601) | (destinasjon == 1103) | (destinasjon == 219) | (destinasjon == 1001) | (destinasjon == 106) | (destinasjon == 1102) | (destinasjon == 1902) | (destinasjon == 602) | (destinasjon == 806) | (destinasjon == 105) | (destinasjon == 1804) | (destinasjon == 220) | (destinasjon == 1504) | (destinasjon == 906) | (destinasjon == 1149) | (destinasjon == 709) | (destinasjon == 706) | (destinasjon == 704) | (destinasjon == 231) | (destinasjon == 1106) | (destinasjon == 805) | (destinasjon == 412) | (destinasjon == 230) | (destinasjon == 1502) | (destinasjon == 403) | (destinasjon == 605) | (destinasjon == 502) | (destinasjon == 101) | (destinasjon == 1833) | (destinasjon == 1901) | (destinasjon == 104) | (destinasjon == 501) | (destinasjon == 701) | (destinasjon == 213) | (destinasjon == 1247) | (destinasjon == 604) | (destinasjon == 1246) | (destinasjon == 235) | (destinasjon == 1124) | (destinasjon == 217) | (destinasjon == 904) | (destinasjon == 1702) | (destinasjon == 625) | (destinasjon == 1714) | (destinasjon == 626) | (destinasjon == 1221) | (destinasjon == 1719) | (destinasjon == 722) | (destinasjon == 2012) | (destinasjon == 1805) | (destinasjon == 1119) | (destinasjon == 427) | (destinasjon == 1503) | (destinasjon == 237) | (destinasjon == 417) | (destinasjon == 1121) | (destinasjon == 1243) | (destinasjon == 236) | (destinasjon == 233) | (destinasjon == 402) | (destinasjon == 1101) | (destinasjon == 814) | (destinasjon == 627) | (destinasjon == 1263) | (destinasjon == 1120) | (destinasjon == 1224) | (destinasjon == 1002) | (destinasjon == 624) | (destinasjon == 1721) | (destinasjon == 1235) | (destinasjon == 216) | (destinasjon == 228) | (destinasjon == 1653) | (destinasjon == 1824) | (destinasjon == 1014) | (destinasjon == 124) | (destinasjon == 528) | (destinasjon == 1219) | (destinasjon == 623) | (destinasjon == 1432) | (destinasjon == 211) | (destinasjon == 1130) | (destinasjon == 1703) | (destinasjon == 214) | (destinasjon == 136) | (destinasjon == 807) | (destinasjon == 534) | (destinasjon == 221) | (destinasjon == 1520) | (destinasjon == 226) | (destinasjon == 1401) | (destinasjon == 529) | (destinasjon == 1931) | (destinasjon == 1638) | (destinasjon == 1860) | (destinasjon == 1663) | (destinasjon == 1122) | (destinasjon == 815) | (destinasjon == 720) | (destinasjon == 215) | (destinasjon == 1146) | (destinasjon == 926) | (destinasjon == 1018) | (destinasjon == 1003) | (destinasjon == 1548) | (destinasjon == 125) | (destinasjon == 1841) | (destinasjon == 1870) | (destinasjon == 1534) | (destinasjon == 1865) | (destinasjon == 1519) | (destinasjon == 1127) | (destinasjon == 1238) | (destinasjon == 1515) | (destinasjon == 1004) | (destinasjon == 702) | (destinasjon == 238) | (destinasjon == 533) | (destinasjon == 716) | (destinasjon == 229) | (destinasjon == 2004) | (destinasjon == 1032) | (destinasjon == 227) | (destinasjon == 2030) | (destinasjon == 1528) | (destinasjon == 1866) | (destinasjon == 1531) | (destinasjon == 1924) | (destinasjon == 1253) | (destinasjon == 128) | (destinasjon == 1532) | (destinasjon == 1813) | (destinasjon == 1420) | (destinasjon == 1449) | (destinasjon == 628) | (destinasjon == 713) | (destinasjon == 1820) | (destinasjon == 415) | (destinasjon == 1837) | (destinasjon == 1539) | (destinasjon == 1563) | (destinasjon == 901) | (destinasjon == 1516) | (destinasjon == 1228) | (destinasjon == 1443) | (destinasjon == 1439) | (destinasjon == 428) | (destinasjon == 419) 
+generate flyttealder = flyttetidspunkt-kohort if flytter == 1 
+tabulate flytter 
+tabulate flyttealder 
+keep if flytter == 1 
+generate y_po = 99 
+generate y_pd = 99 
+replace y_po = 42.0328 + 0.0692 * prosentil_far if kommune92 == 301 
+replace y_pd = 42.0328 + 0.0692 * prosentil_far if destinasjon == 301 
+replace y_po = 44.3031 + 0.0709 * prosentil_far if kommune92 == 1201 
+replace y_pd = 44.3031 + 0.0709 * prosentil_far if destinasjon == 1201 
+replace y_po = 43.3230 + 0.0451 * prosentil_far if kommune92 == 1601 
+replace y_pd = 43.3230 + 0.0451 * prosentil_far if destinasjon == 1601 
+replace y_po = 46.9441 + 0.0582 * prosentil_far if kommune92 == 1103 
+replace y_pd = 46.9441 + 0.0582 * prosentil_far if destinasjon == 1103 
+replace y_po = 42.9514 + 0.0604 * prosentil_far if kommune92 == 219 
+replace y_pd = 42.9514 + 0.0604 * prosentil_far if destinasjon == 219 
+replace y_po = 44.2427 + 0.0692 * prosentil_far if kommune92 == 1001 
+replace y_pd = 44.2427 + 0.0692 * prosentil_far if destinasjon == 1001 
+replace y_po = 43.7450 + 0.0844 * prosentil_far if kommune92 == 106 
+replace y_pd = 43.7450 + 0.0844 * prosentil_far if destinasjon == 106 
+replace y_po = 51.5253 + 0.0487 * prosentil_far if kommune92 == 1102 
+replace y_pd = 51.5253 + 0.0487 * prosentil_far if destinasjon == 1102 
+replace y_po = 43.7155 + 0.0347 * prosentil_far if kommune92 == 1902 
+replace y_pd = 43.7155 + 0.0347 * prosentil_far if destinasjon == 1902 
+replace y_po = 43.6732 + 0.1090 * prosentil_far if kommune92 == 602 
+replace y_pd = 43.6732 + 0.1090 * prosentil_far if destinasjon == 602 
+replace y_po = 41.6658 + 0.1073 * prosentil_far if kommune92 == 806 
+replace y_pd = 41.6658 + 0.1073 * prosentil_far if destinasjon == 806 
+replace y_po = 43.7244 + 0.1336 * prosentil_far if kommune92 == 105 
+replace y_pd = 43.7244 + 0.1336 * prosentil_far if destinasjon == 105 
+replace y_po = 42.4285 + 0.0650 * prosentil_far if kommune92 == 1804 
+replace y_pd = 42.4285 + 0.0650 * prosentil_far if destinasjon == 1804 
+replace y_po = 44.9388 + 0.0363 * prosentil_far if kommune92 == 220 
+replace y_pd = 44.9388 + 0.0363 * prosentil_far if destinasjon == 220 
+replace y_po = 43.8704 + 0.0681 * prosentil_far if kommune92 == 1504 
+replace y_pd = 43.8704 + 0.0681 * prosentil_far if destinasjon == 1504 
+replace y_po = 45.5528 + 0.0544 * prosentil_far if kommune92 == 906 
+replace y_pd = 45.5528 + 0.0544 * prosentil_far if destinasjon == 906 
+replace y_po = 46.7709 + 0.1117 * prosentil_far if kommune92 == 1149 
+replace y_pd = 46.7709 + 0.1117 * prosentil_far if destinasjon == 1149 
+replace y_po = 45.7298 + 0.0493 * prosentil_far if kommune92 == 709 
+replace y_pd = 45.7298 + 0.0493 * prosentil_far if destinasjon == 709 
+replace y_po = 43.4618 + 0.0709 * prosentil_far if kommune92 == 706 
+replace y_pd = 43.4618 + 0.0709 * prosentil_far if destinasjon == 706 
+replace y_po = 41.8603 + 0.0755 * prosentil_far if kommune92 == 704 
+replace y_pd = 41.8603 + 0.0755 * prosentil_far if destinasjon == 704 
+replace y_po = 46.7918 + 0.0548 * prosentil_far if kommune92 == 231 
+replace y_pd = 46.7918 + 0.0548 * prosentil_far if destinasjon == 231 
+replace y_po = 48.3220 + 0.0598 * prosentil_far if kommune92 == 1106 
+replace y_pd = 48.3220 + 0.0598 * prosentil_far if destinasjon == 1106 
+replace y_po = 45.0682 + 0.0637 * prosentil_far if kommune92 == 805 
+replace y_pd = 45.0682 + 0.0637 * prosentil_far if destinasjon == 805 
+replace y_po = 46.6209 + 0.0786 * prosentil_far if kommune92 == 412 
+replace y_pd = 46.6209 + 0.0786 * prosentil_far if destinasjon == 412 
+replace y_po = 47.7725 + 0.0625 * prosentil_far if kommune92 == 230 
+replace y_pd = 47.7725 + 0.0625 * prosentil_far if destinasjon == 230 
+replace y_po = 47.9313 + -0.0000 * prosentil_far if kommune92 == 1502 
+replace y_pd = 47.9313 + -0.0000 * prosentil_far if destinasjon == 1502 
+replace y_po = 42.6765 + 0.0667 * prosentil_far if kommune92 == 403 
+replace y_pd = 42.6765 + 0.0667 * prosentil_far if destinasjon == 403 
+replace y_po = 44.4607 + 0.0820 * prosentil_far if kommune92 == 605 
+replace y_pd = 44.4607 + 0.0820 * prosentil_far if destinasjon == 605 
+replace y_po = 46.5248 + 0.0457 * prosentil_far if kommune92 == 502 
+replace y_pd = 46.5248 + 0.0457 * prosentil_far if destinasjon == 502 
+replace y_po = 44.2917 + 0.0814 * prosentil_far if kommune92 == 101 
+replace y_pd = 44.2917 + 0.0814 * prosentil_far if destinasjon == 101 
+replace y_po = 48.3103 + 0.0372 * prosentil_far if kommune92 == 1833 
+replace y_pd = 48.3103 + 0.0372 * prosentil_far if destinasjon == 1833 
+replace y_po = 42.2761 + 0.1097 * prosentil_far if kommune92 == 1901 
+replace y_pd = 42.2761 + 0.1097 * prosentil_far if destinasjon == 1901 
+replace y_po = 42.1231 + 0.0661 * prosentil_far if kommune92 == 104 
+replace y_pd = 42.1231 + 0.0661 * prosentil_far if destinasjon == 104 
+replace y_po = 45.6009 + 0.0122 * prosentil_far if kommune92 == 501 
+replace y_pd = 45.6009 + 0.0122 * prosentil_far if destinasjon == 501 
+replace y_po = 41.9370 + 0.0660 * prosentil_far if kommune92 == 701 
+replace y_pd = 41.9370 + 0.0660 * prosentil_far if destinasjon == 701 
+replace y_po = 45.8662 + 0.0667 * prosentil_far if kommune92 == 213 
+replace y_pd = 45.8662 + 0.0667 * prosentil_far if destinasjon == 213 
+replace y_po = 47.8296 + 0.0577 * prosentil_far if kommune92 == 1247 
+replace y_pd = 47.8296 + 0.0577 * prosentil_far if destinasjon == 1247 
+replace y_po = 44.4028 + 0.0716 * prosentil_far if kommune92 == 604 
+replace y_pd = 44.4028 + 0.0716 * prosentil_far if destinasjon == 604 
+replace y_po = 48.3737 + 0.0760 * prosentil_far if kommune92 == 1246 
+replace y_pd = 48.3737 + 0.0760 * prosentil_far if destinasjon == 1246 
+replace y_po = 46.9453 + 0.0623 * prosentil_far if kommune92 == 235 
+replace y_pd = 46.9453 + 0.0623 * prosentil_far if destinasjon == 235 
+replace y_po = 55.7621 + -0.0009 * prosentil_far if kommune92 == 1124 
+replace y_pd = 55.7621 + -0.0009 * prosentil_far if destinasjon == 1124 
+replace y_po = 43.8798 + 0.0825 * prosentil_far if kommune92 == 217 
+replace y_pd = 43.8798 + 0.0825 * prosentil_far if destinasjon == 217 
+replace y_po = 43.2859 + 0.0833 * prosentil_far if kommune92 == 904 
+replace y_pd = 43.2859 + 0.0833 * prosentil_far if destinasjon == 904 
+replace y_po = 47.3575 + 0.0493 * prosentil_far if kommune92 == 1702 
+replace y_pd = 47.3575 + 0.0493 * prosentil_far if destinasjon == 1702 
+replace y_po = 43.2554 + 0.1200 * prosentil_far if kommune92 == 625 
+replace y_pd = 43.2554 + 0.1200 * prosentil_far if destinasjon == 625 
+replace y_po = 47.2945 + 0.0515 * prosentil_far if kommune92 == 1714 
+replace y_pd = 47.2945 + 0.0515 * prosentil_far if destinasjon == 1714 
+replace y_po = 45.2464 + 0.0920 * prosentil_far if kommune92 == 626 
+replace y_pd = 45.2464 + 0.0920 * prosentil_far if destinasjon == 626 
+replace y_po = 50.3219 + 0.0156 * prosentil_far if kommune92 == 1221 
+replace y_pd = 50.3219 + 0.0156 * prosentil_far if destinasjon == 1221 
+replace y_po = 44.8762 + 0.0811 * prosentil_far if kommune92 == 1719 
+replace y_pd = 44.8762 + 0.0811 * prosentil_far if destinasjon == 1719 
+replace y_po = 43.3090 + 0.0445 * prosentil_far if kommune92 == 722 
+replace y_pd = 43.3090 + 0.0445 * prosentil_far if destinasjon == 722 
+replace y_po = 46.4799 + 0.0479 * prosentil_far if kommune92 == 2012 
+replace y_pd = 46.4799 + 0.0479 * prosentil_far if destinasjon == 2012 
+replace y_po = 46.7991 + 0.0468 * prosentil_far if kommune92 == 1805 
+replace y_pd = 46.7991 + 0.0468 * prosentil_far if destinasjon == 1805 
+replace y_po = 57.2569 + 0.0404 * prosentil_far if kommune92 == 1119 
+replace y_pd = 57.2569 + 0.0404 * prosentil_far if destinasjon == 1119 
+replace y_po = 46.2505 + 0.0210 * prosentil_far if kommune92 == 427 
+replace y_pd = 46.2505 + 0.0210 * prosentil_far if destinasjon == 427 
+replace y_po = 45.3351 + 0.0606 * prosentil_far if kommune92 == 1503 
+replace y_pd = 45.3351 + 0.0606 * prosentil_far if destinasjon == 1503 
+replace y_po = 48.6349 + 0.0713 * prosentil_far if kommune92 == 237 
+replace y_pd = 48.6349 + 0.0713 * prosentil_far if destinasjon == 237 
+replace y_po = 42.9741 + 0.0763 * prosentil_far if kommune92 == 417 
+replace y_pd = 42.9741 + 0.0763 * prosentil_far if destinasjon == 417 
+replace y_po = 58.9934 + -0.0371 * prosentil_far if kommune92 == 1121 
+replace y_pd = 58.9934 + -0.0371 * prosentil_far if destinasjon == 1121 
+replace y_po = 50.7360 + 0.0283 * prosentil_far if kommune92 == 1243 
+replace y_pd = 50.7360 + 0.0283 * prosentil_far if destinasjon == 1243 
+replace y_po = 47.2600 + 0.0706 * prosentil_far if kommune92 == 236 
+replace y_pd = 47.2600 + 0.0706 * prosentil_far if destinasjon == 236 
+replace y_po = 49.1985 + 0.0347 * prosentil_far if kommune92 == 233 
+replace y_pd = 49.1985 + 0.0347 * prosentil_far if destinasjon == 233 
+replace y_po = 44.0647 + 0.0985 * prosentil_far if kommune92 == 402 
+replace y_pd = 44.0647 + 0.0985 * prosentil_far if destinasjon == 402 
+replace y_po = 52.4055 + 0.0818 * prosentil_far if kommune92 == 1101 
+replace y_pd = 52.4055 + 0.0818 * prosentil_far if destinasjon == 1101 
+replace y_po = 43.9625 + 0.1203 * prosentil_far if kommune92 == 814 
+replace y_pd = 43.9625 + 0.1203 * prosentil_far if destinasjon == 814 
+replace y_po = 44.5793 + 0.0582 * prosentil_far if kommune92 == 627 
+replace y_pd = 44.5793 + 0.0582 * prosentil_far if destinasjon == 627 
+replace y_po = 53.0499 + 0.0117 * prosentil_far if kommune92 == 1263 
+replace y_pd = 53.0499 + 0.0117 * prosentil_far if destinasjon == 1263 
+replace y_po = 53.9375 + 0.0724 * prosentil_far if kommune92 == 1120 
+replace y_pd = 53.9375 + 0.0724 * prosentil_far if destinasjon == 1120 
+replace y_po = 50.6946 + 0.0506 * prosentil_far if kommune92 == 1224 
+replace y_pd = 50.6946 + 0.0506 * prosentil_far if destinasjon == 1224 
+replace y_po = 46.3210 + 0.0743 * prosentil_far if kommune92 == 1002 
+replace y_pd = 46.3210 + 0.0743 * prosentil_far if destinasjon == 1002 
+replace y_po = 46.9359 + 0.0916 * prosentil_far if kommune92 == 624 
+replace y_pd = 46.9359 + 0.0916 * prosentil_far if destinasjon == 624 
+replace y_po = 45.2700 + 0.0596 * prosentil_far if kommune92 == 1721 
+replace y_pd = 45.2700 + 0.0596 * prosentil_far if destinasjon == 1721 
+replace y_po = 49.3137 + 0.0053 * prosentil_far if kommune92 == 1235 
+replace y_pd = 49.3137 + 0.0053 * prosentil_far if destinasjon == 1235 
+replace y_po = 42.6908 + 0.0348 * prosentil_far if kommune92 == 216 
+replace y_pd = 42.6908 + 0.0348 * prosentil_far if destinasjon == 216 
+replace y_po = 43.1065 + 0.1246 * prosentil_far if kommune92 == 228 
+replace y_pd = 43.1065 + 0.1246 * prosentil_far if destinasjon == 228 
+replace y_po = 48.9809 + 0.0625 * prosentil_far if kommune92 == 1653 
+replace y_pd = 48.9809 + 0.0625 * prosentil_far if destinasjon == 1653 
+replace y_po = 44.9437 + 0.1000 * prosentil_far if kommune92 == 1824 
+replace y_pd = 44.9437 + 0.1000 * prosentil_far if destinasjon == 1824 
+replace y_po = 44.5449 + 0.1546 * prosentil_far if kommune92 == 1014 
+replace y_pd = 44.5449 + 0.1546 * prosentil_far if destinasjon == 1014 
+replace y_po = 45.4684 + 0.0567 * prosentil_far if kommune92 == 124 
+replace y_pd = 45.4684 + 0.0567 * prosentil_far if destinasjon == 124 
+replace y_po = 45.5145 + 0.0999 * prosentil_far if kommune92 == 528 
+replace y_pd = 45.5145 + 0.0999 * prosentil_far if destinasjon == 528 
+replace y_po = 50.9530 + 0.1168 * prosentil_far if kommune92 == 1219 
+replace y_pd = 50.9530 + 0.1168 * prosentil_far if destinasjon == 1219 
+replace y_po = 42.5248 + 0.1575 * prosentil_far if kommune92 == 623 
+replace y_pd = 42.5248 + 0.1575 * prosentil_far if destinasjon == 623 
+replace y_po = 50.6638 + -0.0039 * prosentil_far if kommune92 == 1432 
+replace y_pd = 50.6638 + -0.0039 * prosentil_far if destinasjon == 1432 
+replace y_po = 47.9353 + 0.0366 * prosentil_far if kommune92 == 211 
+replace y_pd = 47.9353 + 0.0366 * prosentil_far if destinasjon == 211 
+replace y_po = 53.3536 + 0.0352 * prosentil_far if kommune92 == 1130 
+replace y_pd = 53.3536 + 0.0352 * prosentil_far if destinasjon == 1130 
+replace y_po = 46.1588 + 0.0384 * prosentil_far if kommune92 == 1703 
+replace y_pd = 46.1588 + 0.0384 * prosentil_far if destinasjon == 1703 
+replace y_po = 45.8786 + 0.0461 * prosentil_far if kommune92 == 214 
+replace y_pd = 45.8786 + 0.0461 * prosentil_far if destinasjon == 214 
+replace y_po = 46.1104 + 0.0469 * prosentil_far if kommune92 == 136 
+replace y_pd = 46.1104 + 0.0469 * prosentil_far if destinasjon == 136 
+replace y_po = 42.9743 + 0.1133 * prosentil_far if kommune92 == 807 
+replace y_pd = 42.9743 + 0.1133 * prosentil_far if destinasjon == 807 
+replace y_po = 47.6834 + 0.1029 * prosentil_far if kommune92 == 534 
+replace y_pd = 47.6834 + 0.1029 * prosentil_far if destinasjon == 534 
+replace y_po = 50.5364 + 0.0549 * prosentil_far if kommune92 == 221 
+replace y_pd = 50.5364 + 0.0549 * prosentil_far if destinasjon == 221 
+replace y_po = 46.3026 + 0.0518 * prosentil_far if kommune92 == 1520 
+replace y_pd = 46.3026 + 0.0518 * prosentil_far if destinasjon == 1520 
+replace y_po = 45.0913 + 0.1340 * prosentil_far if kommune92 == 226 
+replace y_pd = 45.0913 + 0.1340 * prosentil_far if destinasjon == 226 
+replace y_po = 49.7658 + 0.0378 * prosentil_far if kommune92 == 1401 
+replace y_pd = 49.7658 + 0.0378 * prosentil_far if destinasjon == 1401 
+replace y_po = 44.7710 + 0.1161 * prosentil_far if kommune92 == 529 
+replace y_pd = 44.7710 + 0.1161 * prosentil_far if destinasjon == 529 
+replace y_po = 48.3882 + 0.0588 * prosentil_far if kommune92 == 1931 
+replace y_pd = 48.3882 + 0.0588 * prosentil_far if destinasjon == 1931 
+replace y_po = 48.4325 + 0.0749 * prosentil_far if kommune92 == 1638 
+replace y_pd = 48.4325 + 0.0749 * prosentil_far if destinasjon == 1638 
+replace y_po = 46.8815 + 0.0543 * prosentil_far if kommune92 == 1860 
+replace y_pd = 46.8815 + 0.0543 * prosentil_far if destinasjon == 1860 
+replace y_po = 44.0674 + 0.0977 * prosentil_far if kommune92 == 1663 
+replace y_pd = 44.0674 + 0.0977 * prosentil_far if destinasjon == 1663 
+replace y_po = 54.0498 + 0.0551 * prosentil_far if kommune92 == 1122 
+replace y_pd = 54.0498 + 0.0551 * prosentil_far if destinasjon == 1122 
+replace y_po = 43.9786 + 0.0702 * prosentil_far if kommune92 == 815 
+replace y_pd = 43.9786 + 0.0702 * prosentil_far if destinasjon == 815 
+replace y_po = 44.6564 + 0.0639 * prosentil_far if kommune92 == 720 
+replace y_pd = 44.6564 + 0.0639 * prosentil_far if destinasjon == 720 
+replace y_po = 42.9678 + 0.0760 * prosentil_far if kommune92 == 215 
+replace y_pd = 42.9678 + 0.0760 * prosentil_far if destinasjon == 215 
+replace y_po = 54.0549 + 0.0415 * prosentil_far if kommune92 == 1146 
+replace y_pd = 54.0549 + 0.0415 * prosentil_far if destinasjon == 1146 
+replace y_po = 46.6789 + 0.0389 * prosentil_far if kommune92 == 926 
+replace y_pd = 46.6789 + 0.0389 * prosentil_far if destinasjon == 926 
+replace y_po = 49.9393 + 0.0397 * prosentil_far if kommune92 == 1018 
+replace y_pd = 49.9393 + 0.0397 * prosentil_far if destinasjon == 1018 
+replace y_po = 53.1682 + 0.0193 * prosentil_far if kommune92 == 1003 
+replace y_pd = 53.1682 + 0.0193 * prosentil_far if destinasjon == 1003 
+replace y_po = 45.5974 + 0.1061 * prosentil_far if kommune92 == 1548 
+replace y_pd = 45.5974 + 0.1061 * prosentil_far if destinasjon == 1548 
+replace y_po = 50.2409 + 0.0470 * prosentil_far if kommune92 == 125 
+replace y_pd = 50.2409 + 0.0470 * prosentil_far if destinasjon == 125 
+replace y_po = 44.5273 + 0.1014 * prosentil_far if kommune92 == 1841 
+replace y_pd = 44.5273 + 0.1014 * prosentil_far if destinasjon == 1841 
+replace y_po = 43.6046 + 0.1084 * prosentil_far if kommune92 == 1870 
+replace y_pd = 43.6046 + 0.1084 * prosentil_far if destinasjon == 1870 
+replace y_po = 53.4694 + -0.0045 * prosentil_far if kommune92 == 1534 
+replace y_pd = 53.4694 + -0.0045 * prosentil_far if destinasjon == 1534 
+replace y_po = 45.5966 + 0.0226 * prosentil_far if kommune92 == 1865 
+replace y_pd = 45.5966 + 0.0226 * prosentil_far if destinasjon == 1865 
+replace y_po = 45.6681 + 0.0354 * prosentil_far if kommune92 == 1519 
+replace y_pd = 45.6681 + 0.0354 * prosentil_far if destinasjon == 1519 
+replace y_po = 56.2249 + 0.0139 * prosentil_far if kommune92 == 1127 
+replace y_pd = 56.2249 + 0.0139 * prosentil_far if destinasjon == 1127 
+replace y_po = 50.0331 + 0.0971 * prosentil_far if kommune92 == 1238 
+replace y_pd = 50.0331 + 0.0971 * prosentil_far if destinasjon == 1238 
+replace y_po = 48.2228 + 0.1067 * prosentil_far if kommune92 == 1515 
+replace y_pd = 48.2228 + 0.1067 * prosentil_far if destinasjon == 1515 
+replace y_po = 46.7010 + 0.1419 * prosentil_far if kommune92 == 1004 
+replace y_pd = 46.7010 + 0.1419 * prosentil_far if destinasjon == 1004 
+replace y_po = 42.6069 + 0.1477 * prosentil_far if kommune92 == 702 
+replace y_pd = 42.6069 + 0.1477 * prosentil_far if destinasjon == 702 
+replace y_po = 48.1970 + 0.0703 * prosentil_far if kommune92 == 238 
+replace y_pd = 48.1970 + 0.0703 * prosentil_far if destinasjon == 238 
+replace y_po = 46.1785 + 0.1039 * prosentil_far if kommune92 == 533 
+replace y_pd = 46.1785 + 0.1039 * prosentil_far if destinasjon == 533 
+replace y_po = 50.4180 + 0.0342 * prosentil_far if kommune92 == 716 
+replace y_pd = 50.4180 + 0.0342 * prosentil_far if destinasjon == 716 
+replace y_po = 51.1020 + 0.0092 * prosentil_far if kommune92 == 229 
+replace y_pd = 51.1020 + 0.0092 * prosentil_far if destinasjon == 229 
+replace y_po = 48.7913 + 0.0303 * prosentil_far if kommune92 == 2004 
+replace y_pd = 48.7913 + 0.0303 * prosentil_far if destinasjon == 2004 
+replace y_po = 50.8466 + 0.0234 * prosentil_far if kommune92 == 1032 
+replace y_pd = 50.8466 + 0.0234 * prosentil_far if destinasjon == 1032 
+replace y_po = 45.5444 + 0.1284 * prosentil_far if kommune92 == 227 
+replace y_pd = 45.5444 + 0.1284 * prosentil_far if destinasjon == 227 
+replace y_po = 47.0407 + -0.0103 * prosentil_far if kommune92 == 2030 
+replace y_pd = 47.0407 + -0.0103 * prosentil_far if destinasjon == 2030 
+replace y_po = 49.6019 + 0.0118 * prosentil_far if kommune92 == 1528 
+replace y_pd = 49.6019 + 0.0118 * prosentil_far if destinasjon == 1528 
+replace y_po = 44.9513 + 0.0621 * prosentil_far if kommune92 == 1866 
+replace y_pd = 44.9513 + 0.0621 * prosentil_far if destinasjon == 1866 
+replace y_po = 45.1892 + 0.1104 * prosentil_far if kommune92 == 1531 
+replace y_pd = 45.1892 + 0.1104 * prosentil_far if destinasjon == 1531 
+replace y_po = 48.6488 + 0.0556 * prosentil_far if kommune92 == 1924 
+replace y_pd = 48.6488 + 0.0556 * prosentil_far if destinasjon == 1924 
+replace y_po = 49.5900 + 0.0753 * prosentil_far if kommune92 == 1253 
+replace y_pd = 49.5900 + 0.0753 * prosentil_far if destinasjon == 1253 
+replace y_po = 44.8205 + 0.1721 * prosentil_far if kommune92 == 128 
+replace y_pd = 44.8205 + 0.1721 * prosentil_far if destinasjon == 128 
+replace y_po = 48.9960 + 0.0204 * prosentil_far if kommune92 == 1532 
+replace y_pd = 48.9960 + 0.0204 * prosentil_far if destinasjon == 1532 
+replace y_po = 48.5309 + 0.0092 * prosentil_far if kommune92 == 1813 
+replace y_pd = 48.5309 + 0.0092 * prosentil_far if destinasjon == 1813 
+replace y_po = 47.6473 + 0.0449 * prosentil_far if kommune92 == 1420 
+replace y_pd = 47.6473 + 0.0449 * prosentil_far if destinasjon == 1420 
+replace y_po = 45.8987 + 0.1072 * prosentil_far if kommune92 == 1449 
+replace y_pd = 45.8987 + 0.1072 * prosentil_far if destinasjon == 1449 
+replace y_po = 43.6314 + 0.0890 * prosentil_far if kommune92 == 628 
+replace y_pd = 43.6314 + 0.0890 * prosentil_far if destinasjon == 628 
+replace y_po = 45.5025 + 0.1071 * prosentil_far if kommune92 == 713 
+replace y_pd = 45.5025 + 0.1071 * prosentil_far if destinasjon == 713 
+replace y_po = 47.3269 + 0.0621 * prosentil_far if kommune92 == 1820 
+replace y_pd = 47.3269 + 0.0621 * prosentil_far if destinasjon == 1820 
+replace y_po = 44.5892 + 0.0910 * prosentil_far if kommune92 == 415 
+replace y_pd = 44.5892 + 0.0910 * prosentil_far if destinasjon == 415 
+replace y_po = 51.0340 + 0.0633 * prosentil_far if kommune92 == 1837 
+replace y_pd = 51.0340 + 0.0633 * prosentil_far if destinasjon == 1837 
+replace y_po = 52.0562 + 0.0304 * prosentil_far if kommune92 == 1539 
+replace y_pd = 52.0562 + 0.0304 * prosentil_far if destinasjon == 1539 
+replace y_po = 43.9558 + 0.0881 * prosentil_far if kommune92 == 1563 
+replace y_pd = 43.9558 + 0.0881 * prosentil_far if destinasjon == 1563 
+replace y_po = 42.7584 + 0.0603 * prosentil_far if kommune92 == 901 
+replace y_pd = 42.7584 + 0.0603 * prosentil_far if destinasjon == 901 
+replace y_po = 48.5112 + 0.0392 * prosentil_far if kommune92 == 1516 
+replace y_pd = 48.5112 + 0.0392 * prosentil_far if destinasjon == 1516 
+replace y_po = 57.2852 + -0.0228 * prosentil_far if kommune92 == 1228 
+replace y_pd = 57.2852 + -0.0228 * prosentil_far if destinasjon == 1228 
+replace y_po = 54.5269 + -0.0359 * prosentil_far if kommune92 == 1443 
+replace y_pd = 54.5269 + -0.0359 * prosentil_far if destinasjon == 1443 
+replace y_po = 45.1097 + 0.1271 * prosentil_far if kommune92 == 1439 
+replace y_pd = 45.1097 + 0.1271 * prosentil_far if destinasjon == 1439 
+replace y_po = 42.0031 + 0.0899 * prosentil_far if kommune92 == 428 
+replace y_pd = 42.0031 + 0.0899 * prosentil_far if destinasjon == 428 
+replace y_po = 46.6796 + 0.0613 * prosentil_far if kommune92 == 419 
+replace y_pd = 46.6796 + 0.0613 * prosentil_far if destinasjon == 419 
+drop if y_po == 99 
+drop if y_pd == 99 
+generate delta = y_pd-y_po 
+tabulate flyttealder 
+tabulate kommune92 
+tabulate destinasjon 
+histogram delta 
+tabulate kommune92, summarize(delta) 
+tabulate destinasjon, summarize(delta) 
+regress prosentil_barn y_po i.flyttealder#c.delta c.prosentil_far#i.flyttealder i.flyttealder 
+regress prosentil_barn y_po i.flyttealder#c.delta c.prosentil_far#i.flyttealder delta i.flyttealder 
+generate diff18 = 18-flyttealder 
+regress prosentil_barn y_po c.diff18#c.delta c.prosentil_far#i.flyttealder i.flyttealder 
+regress prosentil_barn y_po c.diff18#c.delta delta c.prosentil_far#i.flyttealder i.flyttealder 
+regress prosentil_barn y_po c.diff18#c.delta delta c.prosentil_far#i.flyttealder i.flyttealder, noconstant 
+generate diff_delta = diff18*delta 
+clone-dataset flytting flytting1 
+use flytting1 
+collapse (mean) diff_delta, by(far_fnr) 
+rename diff_delta diff_delta_snitt 
+merge diff_delta_snitt into flytting on far_fnr 
+use flytting 
+generate diff_delta_avvik = diff_delta - diff_delta_snitt 
+clone-dataset flytting flytting2 
+use flytting2 
+collapse (mean) prosentil_barn, by(far_fnr) 
+rename prosentil_barn prosentil_snitt 
+merge prosentil_snitt into flytting on far_fnr 
+use flytting 
+generate prosentil_avvik = prosentil_barn - prosentil_snitt 
+clone-dataset flytting flytting3 
+use flytting3 
+collapse (mean) flyttealder, by(far_fnr) 
+rename flyttealder flyttealder_snitt 
+merge flyttealder_snitt into flytting on far_fnr 
+use flytting 
+generate flyttealder_avvik = flyttealder-flyttealder_snitt 
+regress prosentil_avvik diff_delta_avvik if diff_delta_avvik != 0 & prosentil_avvik != 0 
+regress prosentil_avvik diff_delta_avvik flyttealder_avvik if diff_delta_avvik != 0 & prosentil_avvik != 0 
+regress prosentil_avvik diff_delta_avvik if diff_delta_avvik != 0 & prosentil_avvik != 0, noconstant 
